@@ -1,5 +1,3 @@
-
-
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/hawick_circuits.hpp>
@@ -8,6 +6,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <iterator>
+
 
 template <typename OutputStream>
 struct cycle_printer
@@ -39,7 +38,9 @@ struct cycle_printer
        os << get(indices, *i) <<" ";
        os << get(indices, *p.begin()) << '\n';
     }
+    
     OutputStream &os;
+    
 };
 
 
@@ -63,10 +64,23 @@ int main(int argc, char const *argv[])
   for (size_t i = 0; i < sizeof(edges)/sizeof(edges[0]); i++)
     add_edge(edges[i].first, edges[i].second, G).first;
 
-
-
     cycle_printer<std::ostream> visitor(std::cout);
+    std::cout<<"Boost Graph hawick_circuits : \n";
     boost::hawick_circuits(G, visitor);
+
+    std::cout<<"\nBoost Graph hawick_unique_circuits : \n";
+    boost::hawick_unique_circuits(G, visitor);
+
+
+    std::cout<<"\nAdding Parallel edges 4->5 \n";
+    add_edge(2,3,G);
+
+    std::cout<<"\nBoost Graph hawick_circuits after adding parallel edge : \n";
+    boost::hawick_circuits(G, visitor);
+
+    std::cout<<"\nBoost Graph hawick_unique_circuits after adding parallel edge: \n";
+    boost::hawick_unique_circuits(G, visitor);
+
 
     return EXIT_SUCCESS;
 }
