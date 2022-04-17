@@ -17,7 +17,7 @@ struct circuit_printer
             return;
 
         
-        // Iterate over path printing each vertex that forms the cycle.
+        // Iterate over path printing each vertex that forms the circuit.
         typename Path::const_iterator i=p.begin(), before_end = p.end();
 
         for (; i != before_end; ++i)
@@ -58,7 +58,7 @@ int main(int argc, char const *argv[])
     boost::hawick_unique_circuits(G, visitor);
 
 
-    std::cout<<"\nAdding Parallel edges 4->5 \n";
+    std::cout<<"\nAdding Parallel edges 2->3 \n";
     add_edge(2,3,G);
 
     std::cout<<"\nBoost Graph hawick_circuits after adding parallel edge : \n";

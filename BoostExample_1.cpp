@@ -16,7 +16,7 @@ struct circuit_printer
             return;
 
 
-        // Iterate over path printing each vertex that forms the cycle.
+        // Iterate over path printing each vertex that forms the circuit.
         typename Path::const_iterator i=p.begin(), before_end = p.end();
 
         for (; i != before_end; ++i)
